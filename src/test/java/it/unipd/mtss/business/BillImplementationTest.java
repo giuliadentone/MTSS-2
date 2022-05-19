@@ -31,6 +31,14 @@ public class BillImplementationTest {
 
     @Test
     public void testGetOrderPrice() throws BillException {
-        assertEquals(0.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
+
+        EItem mouse = new EItem(itemType.MOUSE, 20, "Logitechi");
+        EItem cpu = new EItem(itemType.PROCESSOR, 30, "Intel 6700x");
+        EItem motheboard = new EItem(itemType.MOTHERBOARD, 40, "Madre");
+
+        itemsOrdered.add(mouse);
+        itemsOrdered.add(cpu);
+        itemsOrdered.add(motheboard);
+        assertEquals(90.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
     }
 }

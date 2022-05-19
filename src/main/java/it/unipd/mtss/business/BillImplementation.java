@@ -13,6 +13,10 @@ import it.unipd.mtss.model.User;
 
 public class BillImplementation {
     public double getOrderPrice(List<EItem> itemsOrdered, User user) throws BillException {
-        return 0.0;
+        double toReturn = 0.0;
+        for (EItem iterable_element : itemsOrdered) {
+            toReturn += iterable_element.getPrezzo();
+        }
+        return toReturn;
     }
 }
