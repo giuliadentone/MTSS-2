@@ -48,6 +48,45 @@ public class BillImplementationTest {
     }
 
     @Test
+    public void testGetOrderPrice_Scontrinovuoto() throws BillException {
+        itemsOrdered = null;
+        try {
+            scontrino.getOrderPrice(itemsOrdered, utente);
+        } catch (BillException e) {
+
+            assertEquals("La lista di prodotti non può essere vuota", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetOrderPrice_Prodottonull() {
+
+        EItem keyboard = new EItem(itemType.KEYBOARD, 20, "Logitechi");
+        EItem cpu = new EItem(itemType.PROCESSOR, 30, "Intel 6700x");
+        itemsOrdered.add(keyboard);
+        itemsOrdered.add(cpu);
+        itemsOrdered.add(null);
+        try {
+            scontrino.getOrderPrice(itemsOrdered, utente);
+        } catch (BillException e) {
+
+            assertEquals("Il prodotto non può essere vuoto", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testGetOrderPrice_senzaUtente() {
+
+        itemsOrdered.add(new EItem(itemType.KEYBOARD, 20, "Logitechi"));
+        try {
+            scontrino.getOrderPrice(itemsOrdered, null);
+        } catch (BillException e) {
+
+            assertEquals("Utente non può essere null", e.getMessage());
+        }
+    }
+
+    @Test
     public void testScontoProcessori() throws BillException {
         for (int i = 0; i < 6; i++) {
             itemsOrdered.add(new EItem(itemType.PROCESSOR, 90, "Ryzen 1600"));

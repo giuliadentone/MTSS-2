@@ -18,7 +18,15 @@ public class BillImplementation {
         List<EItem> processorList = new ArrayList<EItem>();
         List<EItem> motherboardList = new ArrayList<EItem>();
         List<EItem> mouseList = new ArrayList<EItem>();
-
+        if (itemsOrdered == null) {
+            throw new BillException("La lista di prodotti non può essere vuota");
+        }
+        if (itemsOrdered.contains(null)) {
+            throw new BillException("Il prodotto non può essere vuoto");
+        }
+        if (user == null) {
+            throw new BillException("Utente non può essere null");
+        }
         if (itemsOrdered.size() > 30) {
             throw new BillException("La lista di prodotti ordinati è troppo grande (maggiore di 30)");
         }
