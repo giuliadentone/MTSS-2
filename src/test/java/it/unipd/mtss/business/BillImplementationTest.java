@@ -92,4 +92,11 @@ public class BillImplementationTest {
             assertEquals("La lista di prodotti ordinati è troppo grande (maggiore di 30)", e.getMessage());
         }
     }
+
+    @Test
+    public void testminore10euro() throws BillException {
+        EItem tastiera = new EItem(itemType.KEYBOARD, 9, "Tastiera");
+        itemsOrdered.add(tastiera);
+        assertEquals(11.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
+    }
 }

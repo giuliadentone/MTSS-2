@@ -18,7 +18,7 @@ public class BillImplementation {
         List<EItem> processorList = new ArrayList<EItem>();
         List<EItem> motherboardList = new ArrayList<EItem>();
         List<EItem> mouseList = new ArrayList<EItem>();
-        
+
         if (itemsOrdered.size() > 30) {
             throw new BillException("La lista di prodotti ordinati è troppo grande (maggiore di 30)");
         }
@@ -46,6 +46,9 @@ public class BillImplementation {
         // 10% di sconto sopra i 1000€
         if (toReturn > 1000) {
             return toReturn * (1 - 0.1);
+        }
+        if (toReturn < 10) {
+            return toReturn + 2;
         }
         return toReturn;
     }
