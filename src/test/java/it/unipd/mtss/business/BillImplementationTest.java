@@ -80,4 +80,16 @@ public class BillImplementationTest {
         itemsOrdered.add(tastiera);
         assertEquals(900.9, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
     }
+
+    @Test
+    public void test30prodotti() throws BillException {
+        for (int i = 0; i < 32; i++) {
+            itemsOrdered.add(new EItem(itemType.MOUSE, 10, "mouse"));
+        }
+        try {
+            scontrino.getOrderPrice(itemsOrdered, utente);
+        } catch (BillException e) {
+            assertEquals("La lista di prodotti ordinati è troppo grande (maggiore di 30)", e.getMessage());
+        }
+    }
 }

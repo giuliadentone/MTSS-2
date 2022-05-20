@@ -18,7 +18,10 @@ public class BillImplementation {
         List<EItem> processorList = new ArrayList<EItem>();
         List<EItem> motherboardList = new ArrayList<EItem>();
         List<EItem> mouseList = new ArrayList<EItem>();
-
+        
+        if (itemsOrdered.size() > 30) {
+            throw new BillException("La lista di prodotti ordinati è troppo grande (maggiore di 30)");
+        }
         // divide in liste di Processor, Motherboard, Mouse, Keyboard
         for (int i = 0; i < itemsOrdered.size(); i++) {
             switch (itemsOrdered.get(i).getTipo()) {
