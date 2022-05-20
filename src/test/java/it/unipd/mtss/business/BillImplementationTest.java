@@ -52,12 +52,12 @@ public class BillImplementationTest {
 
     @Test
     public void testScontoMouse() throws BillException {
-
+        itemsOrdered.add(new EItem(itemType.MOUSE, 200, "mouse"));
         for (int i = 0; i < 11; i++) {
             itemsOrdered.add(new EItem(itemType.MOUSE, 10, "mouse"));
         }
 
-        assertEquals(100.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
+        assertEquals(300.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
     }
 
     @Test
@@ -72,5 +72,12 @@ public class BillImplementationTest {
         }
 
         assertEquals(740.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
+    }
+
+    @Test
+    public void testSconto1000euro() throws BillException {
+        EItem tastiera = new EItem(itemType.KEYBOARD, 1001, "Tastiera");
+        itemsOrdered.add(tastiera);
+        assertEquals(900.9, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
     }
 }

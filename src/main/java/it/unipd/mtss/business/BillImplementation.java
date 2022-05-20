@@ -37,9 +37,14 @@ public class BillImplementation {
             }
         }
 
-        return getProcessorsPrice(processorList) +
-                getMouseAndKeyboardPrice(keyboardList, mouseList) +
-                getMotherboardPrice(motherboardList);
+        double toReturn = getProcessorsPrice(processorList) +
+                getMotherboardPrice(motherboardList) +
+                getMouseAndKeyboardPrice(keyboardList, mouseList);
+        // 10% di sconto sopra i 1000€
+        if (toReturn > 1000) {
+            return toReturn * (1 - 0.1);
+        }
+        return toReturn;
     }
 
     // il processore meno caro costa metà se sono più di 5 processori
