@@ -75,6 +75,19 @@ public class BillImplementation {
             return 0.0;
         }
         double toReturn = 0.0;
+        EItem priceMin = mouseList.get(0);
+        if (mouseList.size() > 10) {
+            // trova minimo
+            int i = 0, pos = 0;
+            for (EItem x : mouseList) {
+                if (x.getPrezzo() < priceMin.getPrezzo()) {
+                    priceMin = x;
+                    pos = i;
+                }
+                i++;
+            }
+            mouseList.get(pos).sconto(1.0);
+        }
         for (EItem x : mouseList) {
             toReturn += x.getPrezzo(); // somma tutto
         }

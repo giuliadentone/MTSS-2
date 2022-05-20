@@ -49,4 +49,14 @@ public class BillImplementationTest {
         }
         assertEquals(495.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
     }
+
+    @Test
+    public void testScontoMouse() throws BillException {
+
+        for (int i = 0; i < 11; i++) {
+            itemsOrdered.add(new EItem(itemType.MOUSE, 10, "mouse"));
+        }
+
+        assertEquals(100.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
+    }
 }
