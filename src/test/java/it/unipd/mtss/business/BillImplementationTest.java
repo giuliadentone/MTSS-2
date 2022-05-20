@@ -41,4 +41,12 @@ public class BillImplementationTest {
         itemsOrdered.add(motheboard);
         assertEquals(90.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
     }
+
+    @Test
+    public void testScontoProcessori() throws BillException {
+        for (int i = 0; i < 6; i++) {
+            itemsOrdered.add(new EItem(itemType.PROCESSOR, 90, "Ryzen 1600"));
+        }
+        assertEquals(495.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
+    }
 }
