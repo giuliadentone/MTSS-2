@@ -32,11 +32,11 @@ public class BillImplementationTest {
     @Test
     public void testGetOrderPrice() throws BillException {
 
-        EItem mouse = new EItem(itemType.MOUSE, 20, "Logitechi");
+        EItem keyboard = new EItem(itemType.KEYBOARD, 20, "Logitechi");
         EItem cpu = new EItem(itemType.PROCESSOR, 30, "Intel 6700x");
         EItem motheboard = new EItem(itemType.MOTHERBOARD, 40, "Madre");
 
-        itemsOrdered.add(mouse);
+        itemsOrdered.add(keyboard);
         itemsOrdered.add(cpu);
         itemsOrdered.add(motheboard);
         assertEquals(90.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
@@ -58,5 +58,19 @@ public class BillImplementationTest {
         }
 
         assertEquals(100.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
+    }
+
+    @Test
+    public void testMouseAndKeyboard() throws BillException {
+        itemsOrdered.add(new EItem(itemType.MOUSE, 100, "mouse"));
+        itemsOrdered.add(new EItem(itemType.MOUSE, 100, "mouse"));
+        itemsOrdered.add(new EItem(itemType.KEYBOARD, 100, "keyboard"));
+        itemsOrdered.add(new EItem(itemType.KEYBOARD, 5, "keyboard"));
+        for (int i = 0; i < 11; i++) {
+            itemsOrdered.add(new EItem(itemType.MOUSE, 10, "mouse"));
+            itemsOrdered.add(new EItem(itemType.KEYBOARD, 30, "keyboard"));
+        }
+
+        assertEquals(740.0, scontrino.getOrderPrice(itemsOrdered, utente), 1e-8);
     }
 }
