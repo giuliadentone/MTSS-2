@@ -32,4 +32,8 @@ public class EItem {
     public String getNome() {
         return this.nome;
     }
+    
+    public void sconto(double moltiplicatore) {
+        this.prezzo *= (1 - moltiplicatore);
+    }
 }
