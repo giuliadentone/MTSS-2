@@ -38,9 +38,8 @@ public class BillImplementation {
         }
 
         return getProcessorsPrice(processorList) +
-                getMousePrice(mouseList) +
-                getMotherboardPrice(motherboardList) +
-                getKeyboardPrice(keyboardList);
+                getMouseAndKeyboardPrice(keyboardList, mouseList) +
+                getMotherboardPrice(motherboardList);
     }
 
     // il processore meno caro costa metà se sono più di 5 processori
@@ -117,5 +116,35 @@ public class BillImplementation {
         }
 
         return toReturn;
+    }
+
+    // se mouse e tastiere sono dello stesso numero viene regalato il meno caro
+    double getMouseAndKeyboardPrice(List<EItem> keyboardList, List<EItem> mouseList) {
+        if (keyboardList.size() == 0 && mouseList.size() == 0) {
+            return 0.0;
+        }
+        double toReturn = 0.0;
+
+        if (keyboardList.size() == mouseList.size()) {
+            EItem priceMin = mouseList.get(0);
+            for (EItem x : mouseList) {
+                if (x.getPrezzo() < priceMin.getPrezzo() && x.getPrezzo() != 0) {
+                    priceMin = x;
+                }
+                toReturn += x.getPrezzo();// somma tutti i prezzi dei mouse
+
+            }
+            for (EItem x : keyboardList) {
+                if (x.getPrezzo() < priceMin.getPrezzo() && x.getPrezzo() != 0) {
+                    priceMin = x;
+                }
+                toReturn += x.getPrezzo();// somma tutti i prezzi delle tastiere
+            }
+            toReturn -= priceMin.getPrezzo();
+            return toReturn;
+        } else {
+            return getMousePrice(mouseList) + getKeyboardPrice(keyboardList);
+        }
+
     }
 }
